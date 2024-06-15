@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // Import useParams
 import { jwtDecode } from "jwt-decode"; // Import jwtDecode
-import Navbarpenyewa from "../components/navbarpenyewa";
+import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
 
 const PropertyDetail = () => {
   // Remove `match` from props

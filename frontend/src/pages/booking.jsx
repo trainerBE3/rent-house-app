@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbarpenyewa from "../components/navbarpenyewa";
+import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
 import { Link } from "react-router-dom";
 
 const Booking = () => {

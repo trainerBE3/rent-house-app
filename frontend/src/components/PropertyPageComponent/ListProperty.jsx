@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import NavbarUser from "../components/HomeUserPageComponent/NavbarUser";
-import "../dist/homeuser.css";
-
-const HomeUserPage = () => {
+import { useNavigate } from "react-router-dom";
+const ListProperty = () => {
   const [properties, setProperties] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState({
@@ -13,6 +10,7 @@ const HomeUserPage = () => {
     occupant: "",
     ratingOrder: "",
   });
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 8; // jumlah properti per halaman
 
@@ -34,7 +32,7 @@ const HomeUserPage = () => {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    setCurrentPage(1); // Reset halaman ke 1 saat pencarian diubah
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (event) => {
@@ -50,11 +48,11 @@ const HomeUserPage = () => {
       ratingOrder: "",
     });
     setSearchTerm("");
-    setCurrentPage(1); // Reset halaman ke 1 saat filter dibersihkan
+    setCurrentPage(1);
   };
 
   const handleCardClick = (id) => {
-    // implementasi fungsi klik kartu jika diperlukan
+    navigate(`/property/detail/${id}`);
   };
 
   const filteredProperties = properties
@@ -146,11 +144,8 @@ const HomeUserPage = () => {
     return <div className="pagination">{pageNumbers}</div>;
   };
 
-  console.log("Filtered properties:", filteredProperties); // Log filtered properties
-
   return (
     <div>
-      <NavbarUser />
       <section className="properties">
         <Container fluid>
           <div className="search-filter">
@@ -165,7 +160,7 @@ const HomeUserPage = () => {
               value={filter.priceOrder}
               onChange={handleFilterChange}
             >
-              <option value="">Pilih harga</option>
+              <option value="">Urutkan Harga</option>
               <option value="low">Harga terendah</option>
               <option value="high">Harga tertinggi</option>
             </select>
@@ -174,7 +169,7 @@ const HomeUserPage = () => {
               value={filter.occupant}
               onChange={handleFilterChange}
             >
-              <option value="">Pilih occupant</option>
+              <option value="">Tipe Penghuni</option>
               <option value="Pria">Pria</option>
               <option value="Wanita">Wanita</option>
               <option value="Campur">Campur</option>
@@ -184,7 +179,7 @@ const HomeUserPage = () => {
               value={filter.ratingOrder}
               onChange={handleFilterChange}
             >
-              <option value="">Pilih rating</option>
+              <option value="">Urutkan Rating</option>
               <option value="high">Rating tertinggi</option>
               <option value="low">Rating terendah</option>
             </select>
@@ -227,4 +222,4 @@ const HomeUserPage = () => {
   );
 };
 
-export default HomeUserPage;
+export default ListProperty;

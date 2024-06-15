@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbarpenyewa from "../components/navbarpenyewa";
+import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
 
 const formatTransactionDate = (dateString) => {
   // Parsing the date string to get individual components
@@ -22,7 +22,7 @@ const formatTransactionDate = (dateString) => {
     month: "long",
     day: "numeric",
     hour: "2-digit",
-    minute: "2-digit",    
+    minute: "2-digit",
   });
 };
 
@@ -70,7 +70,8 @@ const Transaksi = () => {
                 <p>Metode pembayaran : {transaction.payment_method}</p>
                 <p>Status : {transaction.status}</p>
                 <p>
-                  Waktu transaksi : {formatTransactionDate(transaction.transaction_date)}
+                  Waktu transaksi :{" "}
+                  {formatTransactionDate(transaction.transaction_date)}
                 </p>
               </div>
             ))}

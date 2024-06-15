@@ -7,8 +7,9 @@ import FooterComponent from "./components/FooterComponent";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import HomeUserPage from "./pages/HomeUserPage";
-import Homepenyewa from "./pages/homepenyewa";
+import PropertyPage from "./pages/PropertyPage";
+import DetailPropertyPage from "./pages/DetailPropertyPage";
+
 import Myprofile from "./pages/myprofile";
 import Admin from "./pages/admin";
 import Tambahproperti from "./pages/tambahproperti";
@@ -26,11 +27,12 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/home" element={<HomeUserPage />} />
+        <Route path="/property" element={<PropertyPage />} />
+        <Route path="/property/detail/:id" element={<DetailPropertyPage />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/booking/konfirmasi/:id" element={<Bookingbayar />} />
         <Route path="/transaksi" element={<Transaksi />} />
-        <Route path="/property/detail/:id" element={<Propertydetail />} />
+        <Route path="/property/booking/:id" element={<Propertydetail />} />
         <Route path="/myprofile" element={<Myprofile />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/tambahproperti" element={<Tambahproperti />} />

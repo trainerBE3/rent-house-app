@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
+import LazyLoad from "react-lazyload";
 
 const Coverage = () => {
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/properties")
+      .get("/api/properties")
       .then((response) => {
         const data = response.data;
 
@@ -45,7 +46,13 @@ const Coverage = () => {
             {cities.map((item, index) => (
               <Col md={4} key={index} className="mb-4">
                 <div className="box">
-                  <img src={item.cover} alt={item.name} className="img-fluid" />
+                  <LazyLoad height={200} offset={100}>
+                    <img
+                      src={item.cover}
+                      alt={item.name}
+                      className="img-fluid"
+                    />
+                  </LazyLoad>
                   <div className="overlay">
                     <h5>{item.name}</h5>
                   </div>

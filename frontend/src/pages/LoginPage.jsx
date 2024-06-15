@@ -20,7 +20,7 @@ const LoginPage = () => {
 
       switch (userData.user.role) {
         case 1:
-          navigate("/home");
+          navigate("/property");
           break;
         case 2:
           navigate("/admin");
@@ -31,7 +31,6 @@ const LoginPage = () => {
         default:
           navigate("/");
       }
-      navigate("/home");
     } catch (err) {
       const valErrors = err.response.data.errors;
       let errorMsg = "";
