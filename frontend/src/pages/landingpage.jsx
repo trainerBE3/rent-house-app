@@ -1,15 +1,17 @@
-import React from 'react';
-import Navbar from '../components/navbar';
+import NavbarGeneral from "../components/LandingPageComponent/NavbarGeneral";
+import Banner from "../components/LandingPageComponent/Banner";
+import Recommendation from "../components/LandingPageComponent/Recommendation";
+import Coverage from "../components/LandingPageComponent/Coverage";
+import "../dist/landingpage.css";
+const LandingPage = () => {
+  return (
+    <>
+      <NavbarGeneral />
+      <Banner />
+      <Recommendation />
+      <Coverage />
+    </>
+  );
+};
 
-const Home = () => {
-    return (
-        <div>
-           <Navbar/>
-            <div className='container'>
-                <h1>Welcome to our website</h1>
-            </div>
-        </div>
-    );
-}
-
-export default Home;
+export default LandingPage;

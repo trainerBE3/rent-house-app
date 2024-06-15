@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { verifyToken } = require("../utils/token");
-const {uploadProperty}  = require("../utils/multer");
+const { uploadProperty } = require("../utils/multer");
 const property = require("../controllers").property;
 
-router.get("/", verifyToken, property.getAllProperties);
+router.get("/", property.getAllProperties);
+router.get("/cities", property.getCities);
 router.post(
   "/add",
   verifyToken,

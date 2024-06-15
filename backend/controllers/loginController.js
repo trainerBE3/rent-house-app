@@ -14,12 +14,14 @@ const auth = async (req, res) => {
   try {
     let user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: "Pengguna tidak tersedia" });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Pengguna tidak tersedia" }] });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Password salah" });
+      return res.status(400).json({ errors: [{ msg: "Password Salah" }] });
     }
 
     const payload = {
@@ -34,7 +36,7 @@ const auth = async (req, res) => {
 
     jwt.sign(payload, secret, { expiresIn }, (err, token) => {
       if (err) throw err;
-      res.json({ token, role: user.role });
+      res.json({ token, user: payload });
     });
   } catch (err) {
     console.error(err.message);

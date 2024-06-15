@@ -16,7 +16,9 @@ const addUser = [
     try {
       let user = await User.findOne({ email });
       if (user) {
-        return res.status(400).json({ msg: "Pengguna sudah ada" });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Email sudah terdaftar" }] });
       }
 
       user = new User({
