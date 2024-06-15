@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar-logo {
+  width: 100%;
+  height: 30px;
+}
+
+.sidebar {
+  background-color: var(--third-color);
+  color: var(--color-text);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px; /* Atur lebar sesuai kebutuhan */
+  min-height: 100%;
+  overflow-y: auto; /* Memungkinkan scrollbar di dalam sidebar jika konten lebih panjang */
+}
+
+.sidebar-sticky {
+  margin-top: 4rem;
+}
+
+.main-content {
+  margin-left: calc(200px + 20px); /* Sesuaikan dengan lebar sidebar */  
+}
