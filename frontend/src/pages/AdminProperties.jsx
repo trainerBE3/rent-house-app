@@ -15,11 +15,10 @@ import {
   FaClipboardList,
   FaMoneyBill,
 } from "react-icons/fa";
-import { FaHandHoldingDollar } from "react-icons/fa6";
 import axios from "axios";
 import "../dist/dashboardadmin.css";
 
-const DashboardAdmin = () => {
+const AdminProperties = () => {
   const location = useLocation(); // Get current pathname
   const [userData, setUserData] = useState({});
 
@@ -68,14 +67,10 @@ const DashboardAdmin = () => {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const response = await axios.get('/api/dashboard/total', {
-          headers: {            
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        });
+        const response = await axios.get("/api/dashboard/total");
         setCount(response.data);
       } catch (error) {
-        console.error('Error fetching count:', error);
+        console.error("Error fetching count:", error);
       }
     };
 
@@ -123,12 +118,16 @@ const DashboardAdmin = () => {
         <Row>
           <Col md={2} className="sidebar position-fixed">
             <div className="sidebar-sticky">
-              <Nav variant="pills" defaultActiveKey="/admin/dashboard" className="flex-column">
+              <Nav
+                variant="pills"
+                defaultActiveKey="/admin/dashboard"
+                className="flex-column"
+              >
                 <Nav.Link
                   id="sidebarmenu"
                   href="/admin/dashboard"
                   className="d-flex align-items-center"
-                  active={location.pathname === '/admin/dashboard'}
+                  active={location.pathname === "/admin/dashboard"}
                 >
                   <FaHome className="me-2" />
                   Dashboard
@@ -137,7 +136,7 @@ const DashboardAdmin = () => {
                   id="sidebarmenu"
                   href="/admin/properties"
                   className="d-flex align-items-center"
-                  active={location.pathname === '/admin/properties'}
+                  active={location.pathname === "/admin/properties"}
                 >
                   <FaBuilding className="me-2" />
                   Properties
@@ -162,38 +161,7 @@ const DashboardAdmin = () => {
             </div>
           </Col>
           <Col className="main-content">
-            <div className="d-flex justify-content-center">
-              <Card>
-                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Property</Card.Header>
-                <Card.Body className="d-flex align-items-center justify-content-center">
-                  <FaBuilding size={50} className="me-3" />
-                  <span style={{ fontSize: "50px" }}>{count.propertiesCount}</span>
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Booking</Card.Header>
-                <Card.Body className="d-flex align-items-center justify-content-center">
-                  <FaClipboardList size={50} className="me-3" />
-                  <span style={{ fontSize: "50px" }}>{count.bookingsCount}</span>
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Transaksi</Card.Header>
-                <Card.Body className="d-flex align-items-center justify-content-center">
-                  <FaMoneyBill size={50} className="me-3" />
-                  <span style={{ fontSize: "50px" }}>{count.transactionsCount}</span>
-                </Card.Body>
-              </Card>
-            </div>
-            <div className="card-profit">
-              <Card style={{width: '50rem'}}>
-                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Profit</Card.Header>
-                <Card.Body className="d-flex align-items-center justify-content-center">
-                <FaHandHoldingDollar size={50} className="me-3" />                  
-                  <span style={{ fontSize: "20px" }}>{formatPrice(count.totalProfit)}</span>
-                </Card.Body>
-              </Card>
-            </div>
+            <p>ppq</p>
           </Col>
         </Row>
       </Container>
@@ -201,4 +169,4 @@ const DashboardAdmin = () => {
   );
 };
 
-export default DashboardAdmin;
+export default AdminProperties;
