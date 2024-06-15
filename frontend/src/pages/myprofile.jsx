@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import Navbarpenyewa from "../components/navbarpenyewa";
+import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
 
 const Myprofile = () => {
   const [userData, setUserData] = useState({
@@ -19,7 +19,7 @@ const Myprofile = () => {
     fullname: "",
     email: "",
     no_phone: "",
-  });  
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("token");

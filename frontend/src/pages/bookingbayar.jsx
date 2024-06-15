@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbarpenyewa from "../components/navbarpenyewa";
+import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -103,20 +103,22 @@ const Bookingbayar = () => {
         <p>Durasi : {booking.duration_in_months} bulan</p>
         <p>Status : {booking.status}</p>
         <p>Total price : {booking.total_price}</p>
-        <br/>
+        <br />
         <form onSubmit={handleSubmit}>
           <p>Kode Bayar: {kodeBayar}</p>
           <label>
             Metode Pembayaran:
-            <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+            <select
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            >
               <option value="">Pilih Metode</option>
               <option value="Transfer">Transfer</option>
               <option value="ShopeePay">ShopeePay</option>
               <option value="GoPay">GoPay</option>
               <option value="DANA">DANA</option>
             </select>
-          </label>
-          {" "}
+          </label>{" "}
           <button type="submit">Bayar</button>
         </form>
       </div>

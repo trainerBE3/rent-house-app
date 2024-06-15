@@ -12,7 +12,7 @@ const NavbarGeneral = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto px-auto ">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="#recommendation">Cari Kost</Nav.Link>
+              <Nav.Link href="/property">Cari Kost</Nav.Link>
               <Nav.Link href="/login" className="ms-5 border-login">
                 Login
               </Nav.Link>

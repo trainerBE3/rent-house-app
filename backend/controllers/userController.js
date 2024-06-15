@@ -9,6 +9,17 @@ const getAllUser = async (req, res) => {
   res.json(users);
 };
 
+const getDetailUser = async (req, res) => {
+  const userId = req.params.id;
+  const user = await User.findById(userId, {
+    fullname: 1,
+    email: 1,
+    no_phone: 1,
+    img_url: 1,
+  });
+  res.status(200).json(user);
+};
+
 const uploadProfileImage = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -102,6 +113,7 @@ const logoutAndUpdateLastLogin = async (req, res) => {
 
 module.exports = {
   getAllUser,
+  getDetailUser,
   uploadProfileImage,
   updateUser,
   logoutAndUpdateLastLogin,
