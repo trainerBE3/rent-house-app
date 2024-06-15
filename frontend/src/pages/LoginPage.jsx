@@ -23,7 +23,7 @@ const LoginPage = () => {
           navigate("/property");
           break;
         case 2:
-          navigate("/admin");
+          navigate("/admin/dashboard");
           break;
         case 3:
           navigate("/superadmin");

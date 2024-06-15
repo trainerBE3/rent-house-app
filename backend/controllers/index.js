@@ -4,6 +4,7 @@ const user = require("./userController.js");
 const property = require("./propertyController");
 const booking = require("./bookingController");
 const transaction = require("./transactionController");
+const dashboard = require("./dashboardController");
 
 module.exports = {
   login,
@@ -12,5 +13,6 @@ module.exports = {
   property,
   transaction,
   booking,
-  transaction
+  transaction,
+  dashboard
 };
