@@ -13,6 +13,8 @@ const HomeUserPage = () => {
     occupant: "",
     ratingOrder: "",
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const propertiesPerPage = 8; // jumlah properti per halaman
 
   useEffect(() => {
     fetchProperties();
@@ -32,11 +34,13 @@ const HomeUserPage = () => {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset halaman ke 1 saat pencarian diubah
   };
 
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
     setFilter({ ...filter, [name]: value });
+    setCurrentPage(1); // Reset halaman ke 1 saat filter diubah
   };
 
   const handleClearFilters = () => {
@@ -46,6 +50,11 @@ const HomeUserPage = () => {
       ratingOrder: "",
     });
     setSearchTerm("");
+    setCurrentPage(1); // Reset halaman ke 1 saat filter dibersihkan
+  };
+
+  const handleCardClick = (id) => {
+    // implementasi fungsi klik kartu jika diperlukan
   };
 
   const filteredProperties = properties
@@ -81,6 +90,17 @@ const HomeUserPage = () => {
       return true;
     });
 
+  // Hitung total halaman
+  const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage);
+
+  // Pisahkan properti berdasarkan halaman saat ini
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const currentProperties = filteredProperties.slice(
+    indexOfFirstProperty,
+    indexOfLastProperty
+  );
+
   const formatDetails = (details) => {
     const detailsArray = [];
 
@@ -104,6 +124,26 @@ const HomeUserPage = () => {
       currency: "IDR",
       minimumFractionDigits: 0,
     }).format(price);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const renderPagination = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={i === currentPage ? "active" : ""}
+        >
+          {i}
+        </button>
+      );
+    }
+    return <div className="pagination">{pageNumbers}</div>;
   };
 
   console.log("Filtered properties:", filteredProperties); // Log filtered properties
@@ -151,7 +191,7 @@ const HomeUserPage = () => {
             <button onClick={handleClearFilters}>Clear</button>
           </div>
           <div className="property-list">
-            {filteredProperties.map((property) => (
+            {currentProperties.map((property) => (
               <div
                 key={property._id}
                 className="card"
@@ -171,16 +211,16 @@ const HomeUserPage = () => {
                   <h5 className="card-title">{property.title}</h5>
                   <p className="card-location">{property.location.district}</p>
                   <p className="card-details">
-                    {property.details.furnished ? "Isian" : "Kosongan"},{" "}
-                    {property.details.wifi ? "WiFi" : "Tidak ada WiFi"},{" "}
-                    {property.details.ac ? "AC" : "Tidak ada AC"},{" "}
-                    {property.details.kitchen ? "Dapur" : "Tidak ada Dapur"}
+                    {formatDetails(property.details)}
                   </p>
-                  <p className="card-price">{property.price}/bulan</p>
+                  <p className="card-price">
+                    {formatPrice(property.price)}/bulan
+                  </p>
                 </div>
               </div>
             ))}
           </div>
+          {renderPagination()}
         </Container>
       </section>
     </div>

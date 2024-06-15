@@ -9,14 +9,14 @@
 .property-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: start;
   padding: 5px;
   margin-right: 5px;
   margin-left: 5px;
 }
 
 .card {
-  width: calc(22% - 2px);
+  width: 23%;
   margin: 5px 1%;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
@@ -106,4 +106,82 @@
   font-size: 14px;
   font-weight: 600;
   margin: 5px 0;
+}
+
+/* ini bagian myprofile */
+.container-profile {
+  border: 1px solid black;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-profile p {
+  color: black;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.container-profile .data-profile {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.update-form {
+  margin-top: 10px;
+}
+
+.update-form input,
+.update-form button {
+  margin-top: 10px;
+}
+
+.input-update {
+  display: flex;
+  align-items: center;
+}
+
+.input-update label {
+  width: 100px;
+}
+
+/* nyoba */
+
+.search-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters select {
+  margin-right: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #ccc;
+}
+
+.pagination button.active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.pagination button:focus {
+  outline: none;
 }
