@@ -157,21 +157,21 @@ const DashboardAdmin = () => {
           <Col className="main-content">
             <div className="d-flex justify-content-center">
               <Card>
-                <Card.Header className="text-center">Property</Card.Header>
+                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Property</Card.Header>
                 <Card.Body className="d-flex align-items-center justify-content-center">
                   <FaBuilding size={50} className="me-3" />
                   <span style={{ fontSize: "50px" }}>{count.propertiesCount}</span>
                 </Card.Body>
               </Card>
               <Card>
-                <Card.Header className="text-center">Booking</Card.Header>
+                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Booking</Card.Header>
                 <Card.Body className="d-flex align-items-center justify-content-center">
                   <FaClipboardList size={50} className="me-3" />
                   <span style={{ fontSize: "50px" }}>{count.bookingsCount}</span>
                 </Card.Body>
               </Card>
               <Card>
-                <Card.Header className="text-center">Transaksi</Card.Header>
+                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Transaksi</Card.Header>
                 <Card.Body className="d-flex align-items-center justify-content-center">
                   <FaMoneyBill size={50} className="me-3" />
                   <span style={{ fontSize: "50px" }}>{count.transactionsCount}</span>
@@ -180,7 +180,7 @@ const DashboardAdmin = () => {
             </div>
             <div className="card-profit">
               <Card style={{width: '50rem'}}>
-                <Card.Header className="text-center">Profit</Card.Header>
+                <Card.Header as="h3" className="text-center" style={{background: "#1d2636", color: "white"}}>Profit</Card.Header>
                 <Card.Body className="d-flex align-items-center justify-content-center">
                 <FaHandHoldingDollar size={50} className="me-3" />                  
                   <span style={{ fontSize: "20px" }}>{formatPrice(count.totalProfit)}</span>
