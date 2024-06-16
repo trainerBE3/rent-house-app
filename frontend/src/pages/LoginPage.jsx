@@ -26,7 +26,7 @@ const LoginPage = () => {
           navigate("/admin/dashboard");
           break;
         case 3:
-          navigate("/superadmin");
+          navigate("/admin/dashboard");
           break;
         default:
           navigate("/");
