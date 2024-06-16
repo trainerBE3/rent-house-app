@@ -111,6 +111,10 @@ const AdminProperties = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterStatus]);
+
   return (
     <div className="wrapper">
       <NavbarAndSidebar />
