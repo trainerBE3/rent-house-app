@@ -3,7 +3,7 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 const NavbarGeneral = () => {
   return (
     <div>
-      <Navbar expand="lg">
+      <Navbar expand="lg" sticky="top">
         <Container>
           <Navbar.Brand href="/">
             <img src="/logo-brands.png" alt="logo" width="80%" />

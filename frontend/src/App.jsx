@@ -7,10 +7,12 @@ import FooterComponent from "./components/FooterComponent";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+// User
 import PropertyPage from "./pages/PropertyPage";
 import DetailPropertyPage from "./pages/DetailPropertyPage";
-
+import BookingPage from "./pages/BookingPage";
 import Myprofile from "./pages/myprofile";
+// Admin
 import Admin from "./pages/admin";
 import Tambahproperti from "./pages/tambahproperti";
 import Editproperty from "./pages/editproperty";
@@ -31,7 +33,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/property" element={<PropertyPage />} />
         <Route path="/property/detail/:id" element={<DetailPropertyPage />} />
-        <Route path="/booking" element={<Booking />} />
+        <Route path="/booking" element={<BookingPage />} />
+        <Route path="/bookings" element={<Booking />} />
         <Route path="/booking/konfirmasi/:id" element={<Bookingbayar />} />
         <Route path="/transaksi" element={<Transaksi />} />
         <Route path="/property/booking/:id" element={<Propertydetail />} />

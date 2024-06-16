@@ -6,6 +6,7 @@ import NavbarUserComponent from "../components/NavbarUserComponent";
 import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import "../dist/detailproperty.css";
 
@@ -44,13 +45,16 @@ const DetailPropertyPage = () => {
   }
 
   const handleRent = async () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.id;
     try {
       const response = await axios.post(
-        `/api/properties/rent`,
+        `/api/bookings/add`,
         {
           propertyId: id,
-          startDate,
-          months,
+          start_date: startDate,
+          duration_in_months: months,
+          userId,
         },
         {
           headers: {
@@ -58,13 +62,31 @@ const DetailPropertyPage = () => {
           },
         }
       );
-      alert("Rental request submitted successfully!");
+      Swal.fire({
+        title: "Pemesanan Berhasil",
+        icon: "success",
+      }).then(() => {
+        const totalCost = property.price * months;
+        const message = `Halo, saya ${
+          user.user
+        } ingin memesan kost detail seperti berikut \nID Pemesan : ${userId}\nID Property : ${id}\nNama Kost : ${
+          property.title
+        }\nTanggal sewa : ${startDate.toLocaleDateString(
+          "id-ID"
+        )}\nLama Bulan : ${months} bulan\nDengan Biaya : Rp ${totalCost.toLocaleString()}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=6285156142271&text=${encodeURIComponent(
+          message
+        )}`;
+        window.open(whatsappUrl, "_blank");
+      });
     } catch (error) {
-      console.error("Error submitting rental request:", error);
-      alert("Failed to submit rental request. Please try again.");
+      Swal.fire({
+        title: "Pemesanan Gagal",
+        text: error,
+        icon: "error",
+      });
     }
   };
-  console.log(property);
 
   return (
     <>
@@ -158,6 +180,8 @@ const DetailPropertyPage = () => {
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
+                  locale={id}
+                  dateFormat="dd/MM/yyyy"
                 />
               </div>
               <div>
@@ -171,7 +195,7 @@ const DetailPropertyPage = () => {
                 />
               </div>
               <button className="rent-button" onClick={handleRent}>
-                Sewa
+                Ajukan Sewa
               </button>
             </div>
           </div>

@@ -13,13 +13,14 @@ router.get("/:id", verifyToken, bookingController.getBookingById);
 router.delete("/delete/:id", verifyToken, bookingController.deleteBookingsById);
 
 router.post(
-  "/add/:property",
+  "/add",
   [
+    check("propertyId", "Property diperlukan").not().isEmpty(),
     check("start_date", "Tanggal mulai diperlukan").not().isEmpty(),
     check("duration_in_months", "Durasi dalam bulan diperlukan").isInt({
       min: 1,
     }),
-    check("user", "ID pengguna diperlukan").not().isEmpty(),
+    check("userId", "ID pengguna diperlukan").not().isEmpty(),
   ],
   verifyToken,
   bookingController.addBooking

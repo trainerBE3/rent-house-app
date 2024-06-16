@@ -3,7 +3,7 @@ import axios from "axios";
 import NavbarUserComponent from "../components/NavbarUserComponent";
 import { Link } from "react-router-dom";
 
-const Booking = () => {
+const BookingPage = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const Booking = () => {
       try {
         const response = await axios.get("/api/bookings/user", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Asumsi token disimpan di localStorage
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
         setBookings(response.data);
@@ -113,4 +113,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
+export default BookingPage;

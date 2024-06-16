@@ -43,7 +43,7 @@ const NavbarUserComponent = () => {
   };
 
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" sticky="top">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img src="/logo-brands.png" alt="logo" width="80%" />
