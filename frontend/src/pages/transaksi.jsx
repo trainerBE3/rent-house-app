@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
+import { Container } from "react-bootstrap";
+import NavbarUserComponent from "../components/NavbarUserComponent";
 
 const formatTransactionDate = (dateString) => {
-  // Parsing the date string to get individual components
   const year = dateString.substring(0, 4);
   const month = dateString.substring(4, 6);
   const day = dateString.substring(6, 8);
@@ -11,12 +11,10 @@ const formatTransactionDate = (dateString) => {
   const minutes = dateString.substring(10, 12);
   const seconds = dateString.substring(12, 14);
 
-  // Create a new Date object
   const date = new Date(
     `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
   );
 
-  // Format the date to a more readable format
   return date.toLocaleString("id-ID", {
     year: "numeric",
     month: "long",
@@ -48,9 +46,9 @@ const Transaksi = () => {
   }, []);
 
   return (
-    <div>
-      <Navbarpenyewa />
-      <div className="container">
+    <>
+      <NavbarUserComponent />
+      <Container>
         <h1>History transaksi</h1>
         {transactions.length === 0 ? (
           <p>Tidak ada transaksi ditemukan</p>
@@ -77,8 +75,8 @@ const Transaksi = () => {
             ))}
           </div>
         )}
-      </div>
-    </div>
+      </Container>
+    </>
   );
 };
 

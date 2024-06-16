@@ -11,7 +11,7 @@ import RegisterPage from "./pages/RegisterPage";
 import PropertyPage from "./pages/PropertyPage";
 import DetailPropertyPage from "./pages/DetailPropertyPage";
 import BookingPage from "./pages/BookingPage";
-import Myprofile from "./pages/myprofile";
+import ProfilePage from "./pages/ProfilePage";
 // Admin
 import Admin from "./pages/admin";
 import Tambahproperti from "./pages/tambahproperti";
@@ -38,7 +38,7 @@ function App() {
         <Route path="/booking/konfirmasi/:id" element={<Bookingbayar />} />
         <Route path="/transaksi" element={<Transaksi />} />
         <Route path="/property/booking/:id" element={<Propertydetail />} />
-        <Route path="/myprofile" element={<Myprofile />} />
+        <Route path="/myprofile" element={<ProfilePage />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/tambahproperti" element={<Tambahproperti />} />
         <Route path="/admin/edit/:id" element={<Editproperty />} />

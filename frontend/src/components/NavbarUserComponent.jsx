@@ -57,9 +57,6 @@ const NavbarUserComponent = () => {
             {userData._id ? (
               <>
                 <Nav.Link as={Link} to="/booking">
-                  Booking
-                </Nav.Link>
-                <Nav.Link as={Link} to="/transaksi">
                   Transaksi
                 </Nav.Link>
                 <NavDropdown

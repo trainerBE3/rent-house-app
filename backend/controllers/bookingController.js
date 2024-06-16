@@ -51,7 +51,8 @@ const getBookingsByUser = async (req, res) => {
     const userId = req.user.id;
     const bookings = await Booking.find({ user: userId })
       .populate("property")
-      .populate("user");
+      .populate("user")
+      .sort({ created_at: -1 });
     res.status(200).json(bookings);
   } catch (err) {
     console.error(err.message);

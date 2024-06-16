@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { Container } from "react-bootstrap";
 import axios from "axios";
-import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
+import NavbarUserComponent from "../components/NavbarUserComponent";
 
-const Myprofile = () => {
+const ProfilePage = () => {
   const [userData, setUserData] = useState({
     id: "",
     fullname: "",
@@ -133,9 +134,9 @@ const Myprofile = () => {
   };
 
   return (
-    <div>
-      <Navbarpenyewa />
-      <div className="container-profile">
+    <>
+      <NavbarUserComponent />
+      <Container>
         <div className="data-profile">
           <p>
             {profileImage ? (
@@ -196,9 +197,9 @@ const Myprofile = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </Container>
+    </>
   );
 };
 
-export default Myprofile;
+export default ProfilePage;

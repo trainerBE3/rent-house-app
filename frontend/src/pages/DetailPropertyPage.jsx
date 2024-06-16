@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Container, Accordion } from "react-bootstrap";
 import NavbarUserComponent from "../components/NavbarUserComponent";
 import DatePicker from "react-datepicker";
@@ -15,6 +15,7 @@ const DetailPropertyPage = () => {
   const [property, setProperty] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
   const [months, setMonths] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -65,20 +66,24 @@ const DetailPropertyPage = () => {
       Swal.fire({
         title: "Pemesanan Berhasil",
         icon: "success",
-      }).then(() => {
-        const totalCost = property.price * months;
-        const message = `Halo, saya ${
-          user.user
-        } ingin memesan kost detail seperti berikut \nID Pemesan : ${userId}\nID Property : ${id}\nNama Kost : ${
-          property.title
-        }\nTanggal sewa : ${startDate.toLocaleDateString(
-          "id-ID"
-        )}\nLama Bulan : ${months} bulan\nDengan Biaya : Rp ${totalCost.toLocaleString()}`;
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=6285156142271&text=${encodeURIComponent(
-          message
-        )}`;
-        window.open(whatsappUrl, "_blank");
-      });
+      })
+        .then(() => {
+          const totalCost = property.price * months;
+          const message = `Halo, saya ${
+            user.user
+          } ingin memesan kost detail seperti berikut \nID Pemesan : ${userId}\nID Property : ${id}\nNama Kost : ${
+            property.title
+          }\nTanggal sewa : ${startDate.toLocaleDateString(
+            "id-ID"
+          )}\nLama Bulan : ${months} bulan\nDengan Biaya : Rp ${totalCost.toLocaleString()}`;
+          const whatsappUrl = `https://api.whatsapp.com/send?phone=6285156142271&text=${encodeURIComponent(
+            message
+          )}`;
+          window.open(whatsappUrl, "_blank");
+        })
+        .then(() => {
+          navigate("/booking");
+        });
     } catch (error) {
       Swal.fire({
         title: "Pemesanan Gagal",
