@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const ListProperty = () => {
   const [properties, setProperties] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,7 +53,26 @@ const ListProperty = () => {
   };
 
   const handleCardClick = (id) => {
-    navigate(`/property/detail/${id}`);
+    if (localStorage.getItem("token")) {
+      navigate(`/property/detail/${id}`);
+    } else {
+      Swal.fire({
+        title: "Login Diperlukan",
+        text: "Silahkan login untuk melanjutkan.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Login",
+        cancelButtonText: "Batal",
+        backdrop: `
+                    rgba(0, 0, 0, 0.4)
+                    url("https://images.unsplash.com/photo-1512621425539-058bf5e5b6b6")
+                    center left
+                    no-repeat
+                `,
+      }).then((res) => {
+        res.isConfirmed ? navigate("/login") : navigate(`/property`);
+      });
+    }
   };
 
   const filteredProperties = properties

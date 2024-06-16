@@ -1,11 +1,11 @@
-import NavbarProperty from "../components/PropertyPageComponent/NavbarProperty";
+import NavbarUserComponent from "../components/NavbarUserComponent";
 import ListProperty from "../components/PropertyPageComponent/ListProperty";
 import "../dist/property.css";
 
 const PropertyPage = () => {
   return (
     <div>
-      <NavbarProperty />
+      <NavbarUserComponent />
       <ListProperty />
     </div>
   );
