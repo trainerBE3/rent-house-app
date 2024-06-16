@@ -7,15 +7,6 @@ const TransactionSchema = new mongoose.Schema({
     ref: "Booking",
     required: true,
   },
-  kode_bayar: {
-    type: String,
-    uniqure: true,
-  },
-  payment_method: {
-    type: String,
-    enum: ["Transfer", "ShopeePay", "GoPay", "DANA"],
-    required: true,
-  },
   transaction_date: {
     type: String,
     default: getFormatTime,
