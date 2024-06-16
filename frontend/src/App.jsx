@@ -18,6 +18,8 @@ import Propertydetail from "./pages/propertydetail";
 import Booking from "./pages/booking";
 import Bookingbayar from "./pages/bookingbayar";
 import Transaksi from "./pages/transaksi";
+import DashboardAdmin from "./pages/DashboardAdmin";
+import AdminProperties from "./pages/AdminProperties";
 import "./App.css";
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/tambahproperti" element={<Tambahproperti />} />
         <Route path="/admin/edit/:id" element={<Editproperty />} />
+        <Route path="/admin/dashboard" element={<DashboardAdmin />} />
+        <Route path="/admin/properties" element={<AdminProperties />} />
       </Routes>
       {<FooterComponent />}
     </BrowserRouter>
