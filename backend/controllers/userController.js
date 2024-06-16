@@ -16,6 +16,7 @@ const getDetailUser = async (req, res) => {
     email: 1,
     no_phone: 1,
     img_url: 1,
+    role: 1
   });
   res.status(200).json(user);
 };
