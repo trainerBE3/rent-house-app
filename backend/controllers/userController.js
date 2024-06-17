@@ -16,7 +16,7 @@ const getDetailUser = async (req, res) => {
     email: 1,
     no_phone: 1,
     img_url: 1,
-    role: 1
+    role: 1,
   });
   res.status(200).json(user);
 };
@@ -31,17 +31,7 @@ const uploadProfileImage = async (req, res) => {
     user.img_url = `/public/images/members/${req.file.filename}`;
     await user.save();
 
-    const payload = {
-      id: user._id,
-      user: user.fullname,
-      role: user.role,
-    };
-
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-
-    res.json({ token });
+    res.json(user.img_url);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Kesalahan server");
@@ -74,10 +64,7 @@ const updateUser = [
       const payload = {
         id: user._id,
         user: user.fullname,
-        email: user.email,
-        no_phone: user.no_phone,
         role: user.role,
-        img_url: user.img_url,
       };
 
       const token = jwt.sign(payload, process.env.JWT_SECRET, {

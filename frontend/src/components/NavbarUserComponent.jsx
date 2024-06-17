@@ -24,7 +24,7 @@ const NavbarUserComponent = () => {
     try {
       const response = await axios.get(`/api/users/detail/${userId}`);
       const user = response.data;
-      localStorage.setItem("userData", user);
+      localStorage.setItem("userData", JSON.stringify(user));
       setUserData(user);
       setProfileImage(user.img_url);
     } catch (error) {
