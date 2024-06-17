@@ -5,8 +5,6 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-require("./utils/db");
-
 const usersRouter = require("./routes/users");
 const propertiesRouter = require("./routes/properties");
 const loginRoutes = require("./routes/login");
@@ -22,7 +20,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use("/api/users", usersRouter);
 app.use("/api/properties", propertiesRouter);

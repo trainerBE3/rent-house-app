@@ -24,6 +24,7 @@ const NavbarUserComponent = () => {
     try {
       const response = await axios.get(`/api/users/detail/${userId}`);
       const user = response.data;
+      localStorage.setItem("userData", user);
       setUserData(user);
       setProfileImage(user.img_url);
     } catch (error) {
@@ -36,6 +37,7 @@ const NavbarUserComponent = () => {
       await axios.put(`/api/users/logout/${userData._id}`);
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("userData");
       navigate("/");
     } catch (error) {
       console.error(error);
