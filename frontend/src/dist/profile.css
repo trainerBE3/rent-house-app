@@ -1,0 +1,52 @@
+.profile-page {
+  padding: 20px;
+}
+
+.data-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-image img {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profile-actions {
+  margin-bottom: 20px;
+}
+
+.profile-details p {
+  margin: 5px 0;
+}
+
+.update-form {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.input-update {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.input-update input {
+  flex: 1;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.update-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.update-form button:hover {
+  background-color: #0056b3;
+}

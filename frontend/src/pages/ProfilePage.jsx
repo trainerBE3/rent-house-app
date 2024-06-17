@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 import NavbarUserComponent from "../components/NavbarUserComponent";
+import "../dist/profile.css";
 
 const ProfilePage = () => {
-  const [userData, setUserData] = useState({
-    id: "",
-    fullname: "",
-    email: "",
-    no_phone: "",
-    role: "",
-    img_url: "",
-  });
+  const [userData, setUserData] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileImage, setProfileImage] = useState("");
   const [showUpdateForm, setShowUpdateForm] = useState(false);
@@ -23,19 +16,29 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const decoded = jwtDecode(token);
-      setUserData({
-        id: decoded.id,
-        fullname: decoded.user,
-        email: decoded.email,
-        no_phone: decoded.no_phone,
-        role: decoded.role,
-        img_url: decoded.img_url,
-      });
-      setProfileImage(decoded.img_url);
-    }
+    let valUser = JSON.parse(localStorage.getItem("user"));
+    const userId = valUser.id;
+    const fetchUserData = async (userId) => {
+      try {
+        const response = await axios.get(`/api/users/detail/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const user = response.data;
+        setUserData(user);
+        setProfileImage(user.img_url);
+        setUpdatedData({
+          fullname: user.fullname,
+          email: user.email,
+          no_phone: user.no_phone,
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const handleFileChange = (e) => {
@@ -47,19 +50,15 @@ const ProfilePage = () => {
     formData.append("profileImage", selectedFile);
 
     try {
-      const res = await axios.post(
-        `/api/users/upload/${userData.id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const res = await axios.post(`/api/users/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const newImgUrl = res.data.img_url + `?t=${new Date().getTime()}`;
       setProfileImage(newImgUrl);
       alert("Foto profil berhasil diunggah");
-      window.location.reload();
       setUserData((prevState) => ({
         ...prevState,
         img_url: newImgUrl,
@@ -71,11 +70,6 @@ const ProfilePage = () => {
   };
 
   const handleShowUpdateForm = () => {
-    setUpdatedData({
-      fullname: userData.fullname,
-      email: userData.email,
-      no_phone: userData.no_phone,
-    });
     setShowUpdateForm(!showUpdateForm);
   };
 
@@ -96,36 +90,21 @@ const ProfilePage = () => {
     }
 
     try {
-      const res = await axios.put(
-        `/api/users/update/${userData.id}`,
-        updatedData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-
-      const { token } = res.data;
-      localStorage.setItem("token", token);
-      const decoded = jwtDecode(token);
-      setUserData({
-        id: decoded.id,
-        fullname: decoded.user,
-        email: decoded.email,
-        no_phone: decoded.no_phone,
-        role: decoded.role,
-        img_url: decoded.img_url,
+      const res = await axios.put(`/api/users/update`, updatedData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
-      setProfileImage(decoded.img_url);
+
+      setUserData(res.data);
+      setProfileImage(res.data.img_url);
       alert("Data berhasil diupdate");
       setShowUpdateForm(false);
-      window.location.reload();
     } catch (err) {
       console.error(err);
       if (err.response && err.response.data && err.response.data.errors) {
-        alert("Gagal mengupdate data : " + err.response.data.errors[0].msg);
+        alert("Gagal mengupdate data: " + err.response.data.errors[0].msg);
       } else {
         alert("Gagal mengupdate data");
       }
@@ -136,68 +115,67 @@ const ProfilePage = () => {
   return (
     <>
       <NavbarUserComponent />
-      <Container>
-        <div className="data-profile">
-          <p>
-            {profileImage ? (
-              <img src={profileImage} alt="Profil" width="100" />
-            ) : (
-              "Belum ada foto"
-            )}
-          </p>
-          <p>Update foto profile</p>
-          <input type="file" onChange={handleFileChange} />
-          <button onClick={handleUpload}>Upload Foto Profil</button>
-          <p>Fullname : {userData.fullname}</p>
-          <p>Email : {userData.email}</p>
-          <p>No Phone : {userData.no_phone}</p>
-          <p>Role : {userData.role === 1 ? "Penyewa" : "Pemilik"}</p>
-          <button onClick={handleShowUpdateForm}>
-            {showUpdateForm ? "Tutup Formulir Pembaruan" : "Perbarui Data"}
-          </button>
-          {showUpdateForm && (
-            <div className="update-form">
-              <h3>Update Data</h3>
-              <form onSubmit={handleUpdate}>
-                <div className="input-update">
-                  <label>
-                    Fullname <span>:</span>{" "}
-                  </label>
-                  <input
-                    type="text"
-                    name="fullname"
-                    value={updatedData.fullname}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="input-update">
-                  <label>
-                    Email <span>:</span>{" "}
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={updatedData.email}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="input-update">
-                  <label>
-                    No Phone <span>:</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="no_phone"
-                    value={updatedData.no_phone}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <button type="submit">Update</button>
-              </form>
+      <section className="profile-page">
+        <Container>
+          <div className="data-profile">
+            <div className="profile-image">
+              {profileImage ? (
+                <img src={profileImage} alt="Profil" width="100" />
+              ) : (
+                "Belum ada foto"
+              )}
             </div>
-          )}
-        </div>
-      </Container>
+            <div className="profile-actions">
+              <input type="file" onChange={handleFileChange} />
+              <button onClick={handleUpload}>Upload Foto Profil</button>
+            </div>
+            <div className="profile-details">
+              <p>Fullname: {userData.fullname}</p>
+              <p>Email: {userData.email}</p>
+              <p>No Phone: {userData.no_phone}</p>
+              <p>Role: {userData.role === 1 ? "Penyewa" : "Pemilik"}</p>
+              <button onClick={handleShowUpdateForm}>
+                {showUpdateForm ? "Tutup Formulir Pembaruan" : "Perbarui Data"}
+              </button>
+            </div>
+            {showUpdateForm && (
+              <div className="update-form">
+                <h3>Update Data</h3>
+                <form onSubmit={handleUpdate}>
+                  <div className="input-update">
+                    <label>Fullname: </label>
+                    <input
+                      type="text"
+                      name="fullname"
+                      value={updatedData.fullname}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="input-update">
+                    <label>Email: </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={updatedData.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="input-update">
+                    <label>No Phone: </label>
+                    <input
+                      type="text"
+                      name="no_phone"
+                      value={updatedData.no_phone}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <button type="submit">Update</button>
+                </form>
+              </div>
+            )}
+          </div>
+        </Container>
+      </section>
     </>
   );
 };

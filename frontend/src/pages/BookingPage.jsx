@@ -193,7 +193,7 @@ Dengan Biaya: Rp ${totalCost.toLocaleString("id-ID")}`;
                             </p>
                             <hr />
                             <p>
-                              <strong>Total Pembayaran :</strong> Rp
+                              <strong>Total Pembayaran :</strong> {" Rp "}
                               {booking.total_price.toLocaleString()}
                             </p>
                           </Accordion.Body>
