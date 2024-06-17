@@ -23,6 +23,7 @@ import Transaksi from "./pages/transaksi";
 import DashboardAdmin from "./pages/DashboardAdmin";
 import AdminProperties from "./pages/AdminProperties";
 import AddProperties from "./pages/AddProperties";
+import EditProperties from "./pages/EditProperties";
 import "./App.css";
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/admin/dashboard" element={<DashboardAdmin />} />
         <Route path="/admin/properties" element={<AdminProperties />} />
         <Route path="/admin/properties/tambahproperti" element={<AddProperties />} />
+        <Route path="/admin/properties/editproperti/:id" element={<EditProperties />} />
       </Routes>
       {<FooterComponent />}
     </BrowserRouter>

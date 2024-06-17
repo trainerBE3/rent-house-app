@@ -63,7 +63,7 @@ const AdminProperties = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Hapus",
-      cancelButtonText : "Batal"
+      cancelButtonText: "Batal",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -173,7 +173,15 @@ const AdminProperties = () => {
                   <td>{property.rating}</td>
                   <td>{property.status}</td>
                   <td>
-                    <Button variant="primary" className="me-2 text-white">
+                    <Button
+                      variant="primary"
+                      className="me-2 text-white"
+                      onClick={() =>
+                        navigate(
+                          `/admin/properties/editproperti/${property._id}`
+                        )
+                      }
+                    >
                       Edit
                     </Button>
                     {userData.role === 3 && (
