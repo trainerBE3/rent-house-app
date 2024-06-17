@@ -5,8 +5,7 @@
 }
 
 .main-content {
-  margin-left: calc(200px + 25px);  
-  border: 1px solid black;
+  margin-left: calc(200px + 25px);    
 }
 
 .card-profit {

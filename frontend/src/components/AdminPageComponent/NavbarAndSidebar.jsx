@@ -103,7 +103,7 @@ const NavbarAndSidebar = () => {
                   id="sidebarmenu"
                   href="/admin/properties"
                   className="d-flex align-items-center"
-                  active={location.pathname === '/admin/properties'}
+                  active={location.pathname.startsWith('/admin/properties')}
                 >
                   <FaBuilding className="me-2" />
                   Property

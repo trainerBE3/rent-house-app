@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Col, Button, Table, Pagination, Form } from "react-bootstrap";
 import NavbarAndSidebar from "../components/AdminPageComponent/NavbarAndSidebar";
 import Swal from "sweetalert2";
@@ -12,6 +13,7 @@ const AdminProperties = () => {
   const propertiesPerPage = 10;
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -61,6 +63,7 @@ const AdminProperties = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Hapus",
+      cancelButtonText : "Batal"
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -122,10 +125,15 @@ const AdminProperties = () => {
         <div className="property-title">
           <h1>Kelola Properti</h1>
           <div className="item d-flex align-items-center">
-            <Button variant="info">Tambah properti</Button>
+            <Button
+              variant="info"
+              onClick={() => navigate("/admin/properties/tambahproperti")}
+            >
+              Tambah properti
+            </Button>
             <input
               type="text"
-              placeholder="Cari properti"              
+              placeholder="Cari properti"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -165,11 +173,16 @@ const AdminProperties = () => {
                   <td>{property.rating}</td>
                   <td>{property.status}</td>
                   <td>
-                    <button>Edit</button>
+                    <Button variant="primary" className="me-2 text-white">
+                      Edit
+                    </Button>
                     {userData.role === 3 && (
-                      <button onClick={() => handleDelete(property._id)}>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelete(property._id)}
+                      >
                         Hapus
-                      </button>
+                      </Button>
                     )}
                   </td>
                 </tr>
@@ -178,7 +191,11 @@ const AdminProperties = () => {
           </Table>
           <Pagination className="mt-3">
             {Array.from(
-              { length: Math.ceil(filteredProperties.length / propertiesPerPage) },
+              {
+                length: Math.ceil(
+                  filteredProperties.length / propertiesPerPage
+                ),
+              },
               (_, i) => (
                 <Pagination.Item
                   key={i + 1}
