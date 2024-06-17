@@ -10,6 +10,8 @@ router.get("/user", verifyToken, bookingController.getBookingsByUser);
 
 router.get("/:id", verifyToken, bookingController.getBookingById);
 
+router.put('/cancel/:id', verifyToken, bookingController.cancelBooking);
+
 router.delete("/delete/:id", verifyToken, bookingController.deleteBookingsById);
 
 router.post(

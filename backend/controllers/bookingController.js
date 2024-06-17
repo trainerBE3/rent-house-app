@@ -5,12 +5,30 @@ const { validationResult } = require("express-validator");
 const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
-      .populate("property : propertyId")
+      .populate("property")
       .populate("user");
     res.status(200).json(bookings);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Kesalahan server");
+  }
+};
+
+const cancelBooking = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+    const booking = await Booking.findById(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    booking.status = "failed";
+    await booking.save();
+
+    res.status(200).json({ message: "Booking cancelled successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -101,4 +119,5 @@ module.exports = {
   getBookingsByUser,
   getBookingById,
   deleteBookingsById,
+  cancelBooking
 };

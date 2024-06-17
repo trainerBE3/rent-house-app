@@ -110,16 +110,18 @@ const NavbarAndSidebar = () => {
                 </Nav.Link>
                 <Nav.Link
                   id="sidebarmenu"
-                  href="/bookings"
+                  href="/admin/bookings"
                   className="d-flex align-items-center"
+                  active={location.pathname.startsWith('/admin/bookings')}
                 >
                   <FaClipboardList className="me-2" />
                   Booking
                 </Nav.Link>
                 <Nav.Link
                   id="sidebarmenu"
-                  href="/transactions"
+                  href="/admin/transactions"
                   className="d-flex align-items-center"
+                  active={location.pathname.startsWith('/admin/transactions')}
                 >
                   <FaMoneyBill className="me-2" />
                   Transaksi

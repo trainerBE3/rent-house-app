@@ -3,19 +3,17 @@ const Property = require("../models/properties");
 const Transaction = require("../models/transactions");
 
 const createTransaction = async (req, res) => {
-  try {
-    const { booking, payment_method, kode_bayar } = req.body;
+  try {    
+    const bookingId = req.params.id;
 
     const newTransaction = new Transaction({
-      booking,
-      payment_method,
-      kode_bayar,
+      booking: bookingId,      
       status: "success",
     });
 
     await newTransaction.save();
     
-    const relatedBooking = await Booking.findById(booking);
+    const relatedBooking = await Booking.findById(bookingId);
     if (!relatedBooking) {
       return res.status(404).json({ msg: "Booking tidak ditemukan" });
     }
@@ -29,9 +27,7 @@ const createTransaction = async (req, res) => {
     relatedProperty.stocks -= 1;
     await relatedProperty.save();
 
-    res
-      .status(201)
-      .json({ msg: "Pembayaran berhasil", transaction: newTransaction });
+    res.status(201).json({ msg: "Pembayaran berhasil", transaction: newTransaction });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Kesalahan server");
@@ -61,7 +57,35 @@ const getTransactionByUser = async (req, res) => {
   }
 };
 
+const getAllTransactionsWithDetails = async (req, res) => {
+  try {
+    const transactions = await Transaction.find()
+      .populate({
+        path: "booking",
+        populate: [
+          {
+            path: "user",
+            model: "User",
+            select: "fullname",
+          },
+          {
+            path: "property",
+            model: "Property",
+            select: "title", 
+          },
+        ],
+      })
+      .exec();
+
+    res.status(200).json(transactions);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   createTransaction,
   getTransactionByUser,
+  getAllTransactionsWithDetails
 };
