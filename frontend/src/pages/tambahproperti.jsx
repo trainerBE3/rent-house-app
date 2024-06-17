@@ -99,7 +99,7 @@ const Tambahproperti = () => {
       console.error(err);
       alert('Gagal menambahkan properti');
     }
-  };  
+  };
 
   return (
     <form onSubmit={handleSubmit}>
