@@ -1,25 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Component
+import ProtectedRoute from "./components/ProtectedRoute";
 import FooterComponent from "./components/FooterComponent";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import NotFoundPage from "./pages/NotFoundPage";
 // User
 import PropertyPage from "./pages/PropertyPage";
 import DetailPropertyPage from "./pages/DetailPropertyPage";
 import BookingPage from "./pages/BookingPage";
 import ProfilePage from "./pages/ProfilePage";
 // Admin
-import Admin from "./pages/admin";
-import Tambahproperti from "./pages/tambahproperti";
-import Editproperty from "./pages/editproperty";
-import Propertydetail from "./pages/propertydetail";
-import Booking from "./pages/booking";
-import Bookingbayar from "./pages/bookingbayar";
-import Transaksi from "./pages/transaksi";
 import DashboardAdmin from "./pages/DashboardAdmin";
 import AdminProperties from "./pages/AdminProperties";
 import AddProperties from "./pages/AddProperties";
@@ -36,22 +31,43 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/property" element={<PropertyPage />} />
-        <Route path="/property/detail/:id" element={<DetailPropertyPage />} />
-        <Route path="/booking" element={<BookingPage />} />
-        <Route path="/bookings" element={<Booking />} />
-        <Route path="/booking/konfirmasi/:id" element={<Bookingbayar />} />
-        <Route path="/transaksi" element={<Transaksi />} />
-        <Route path="/property/booking/:id" element={<Propertydetail />} />
-        <Route path="/myprofile" element={<ProfilePage />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/tambahproperti" element={<Tambahproperti />} />
-        <Route path="/admin/edit/:id" element={<Editproperty />} />
-        <Route path="/admin/dashboard" element={<DashboardAdmin />} />
-        <Route path="/admin/properties" element={<AdminProperties />} />
-        <Route path="/admin/properties/tambahproperti" element={<AddProperties />} />
-        <Route path="/admin/properties/editproperti/:id" element={<EditProperties />} />
-        <Route path="/admin/bookings" element={<AdminBooking />} />
-        <Route path="/admin/transactions" element={<AdminTransaction />} />
+        <Route
+          path="/property/detail/:id"
+          element={<ProtectedRoute element={DetailPropertyPage} userRoute />}
+        />
+        <Route
+          path="/booking"
+          element={<ProtectedRoute element={BookingPage} userRoute />}
+        />
+        <Route
+          path="/myprofile"
+          element={<ProtectedRoute element={ProfilePage} userRoute />}
+        />
+        <Route
+          path="/admin/dashboard"
+          element={<ProtectedRoute element={DashboardAdmin} adminRoute />}
+        />
+        <Route
+          path="/admin/properties"
+          element={<ProtectedRoute element={AdminProperties} adminRoute />}
+        />
+        <Route
+          path="/admin/tambahproperti"
+          element={<ProtectedRoute element={AddProperties} adminRoute />}
+        />
+        <Route
+          path="/admin/edit/:id"
+          element={<ProtectedRoute element={EditProperties} adminRoute />}
+        />
+        <Route
+          path="/admin/bookings"
+          element={<ProtectedRoute element={AdminBooking} adminRoute />}
+        />
+        <Route
+          path="/admin/transactions"
+          element={<ProtectedRoute element={AdminTransaction} adminRoute />}
+        />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {<FooterComponent />}
     </BrowserRouter>
