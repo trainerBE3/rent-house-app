@@ -41,7 +41,7 @@ function App() {
         />
         <Route
           path="/myprofile"
-          element={<ProtectedRoute element={ProfilePage} userRoute />}
+          element={<ProtectedRoute element={ProfilePage} />}
         />
         <Route
           path="/admin/dashboard"
@@ -52,7 +52,7 @@ function App() {
           element={<ProtectedRoute element={AdminProperties} adminRoute />}
         />
         <Route
-          path="/admin/tambahproperti"
+          path="/admin/properties/tambahproperti"
           element={<ProtectedRoute element={AddProperties} adminRoute />}
         />
         <Route

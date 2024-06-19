@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Nav,
-  Navbar,
-  NavDropdown,  
-} from "react-bootstrap";
+import { Container, Row, Col, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import {
   FaHome,
   FaBuilding,
   FaClipboardList,
-  FaMoneyBill,  
+  FaMoneyBill,
   FaUser,
 } from "react-icons/fa";
 import axios from "axios";
@@ -26,7 +19,7 @@ const NavbarAndSidebar = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      setUserData(user);      
+      setUserData(user);
     }
   }, []);
 
@@ -39,7 +32,7 @@ const NavbarAndSidebar = () => {
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(`/api/users/detail/${userId}`);
-      setUserData(response.data);      
+      setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -50,11 +43,12 @@ const NavbarAndSidebar = () => {
       await axios.put(`/api/users/logout/${userData._id}`);
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("userData");
       navigate("/");
     } catch (error) {
       console.error(error);
     }
-  }; 
+  };
 
   return (
     <>
@@ -89,12 +83,16 @@ const NavbarAndSidebar = () => {
         <Row>
           <Col md={2} className="sidebar position-fixed">
             <div className="sidebar-sticky">
-              <Nav variant="pills" defaultActiveKey="/admin/dashboard" className="flex-column">
+              <Nav
+                variant="pills"
+                defaultActiveKey="/admin/dashboard"
+                className="flex-column"
+              >
                 <Nav.Link
                   id="sidebarmenu"
                   href="/admin/dashboard"
                   className="d-flex align-items-center"
-                  active={location.pathname === '/admin/dashboard'}
+                  active={location.pathname === "/admin/dashboard"}
                 >
                   <FaHome className="me-2" />
                   Dashboard
@@ -103,7 +101,7 @@ const NavbarAndSidebar = () => {
                   id="sidebarmenu"
                   href="/admin/properties"
                   className="d-flex align-items-center"
-                  active={location.pathname.startsWith('/admin/properties')}
+                  active={location.pathname.startsWith("/admin/properties")}
                 >
                   <FaBuilding className="me-2" />
                   Property
@@ -112,7 +110,7 @@ const NavbarAndSidebar = () => {
                   id="sidebarmenu"
                   href="/admin/bookings"
                   className="d-flex align-items-center"
-                  active={location.pathname.startsWith('/admin/bookings')}
+                  active={location.pathname.startsWith("/admin/bookings")}
                 >
                   <FaClipboardList className="me-2" />
                   Booking
@@ -121,7 +119,7 @@ const NavbarAndSidebar = () => {
                   id="sidebarmenu"
                   href="/admin/transactions"
                   className="d-flex align-items-center"
-                  active={location.pathname.startsWith('/admin/transactions')}
+                  active={location.pathname.startsWith("/admin/transactions")}
                 >
                   <FaMoneyBill className="me-2" />
                   Transaksi
@@ -138,7 +136,7 @@ const NavbarAndSidebar = () => {
                 )}
               </Nav>
             </div>
-          </Col>          
+          </Col>
         </Row>
       </Container>
     </>

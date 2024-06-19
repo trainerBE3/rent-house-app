@@ -3,8 +3,8 @@ import Swal from "sweetalert2";
 
 const ProtectedRoute = ({
   element: Component,
-  adminRoute,
-  userRoute,
+  allowedRoles,
+  notAllowedRoles,
   ...rest
 }) => {
   const navigate = useNavigate();
@@ -30,26 +30,34 @@ const ProtectedRoute = ({
     return null;
   }
 
-  if (userRoute && (role === 2 || role === 3)) {
+  if (notAllowedRoles && notAllowedRoles.includes(role)) {
     Swal.fire({
       title: "Akses Dicekal",
-      text: "Admin dilarang mengakses halaman user",
+      text: `Role ${role} tidak diizinkan mengakses halaman ini`,
       icon: "error",
-      confirmButtonText: "Kembali ke dashboard",
+      confirmButtonText: "Kembali",
     }).then(() => {
-      navigate("/admin/dashboard");
+      if (role === 1) {
+        navigate("/property");
+      } else {
+        navigate("/admin/dashboard");
+      }
     });
     return null;
   }
 
-  if (adminRoute && role === 1) {
+  if (allowedRoles && !allowedRoles.includes(role)) {
     Swal.fire({
       title: "Akses Dicekal",
-      text: "User dilarang mengakses halaman admin",
+      text: `Role ${role} tidak diizinkan mengakses halaman ini`,
       icon: "error",
-      confirmButtonText: "Kembali ke menu utama",
+      confirmButtonText: "Kembali",
     }).then(() => {
-      navigate("/property");
+      if (role === 1) {
+        navigate("/property");
+      } else {
+        navigate("/admin/dashboard");
+      }
     });
     return null;
   }
