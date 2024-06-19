@@ -21,6 +21,7 @@ import AddProperties from "./pages/AddProperties";
 import EditProperties from "./pages/EditProperties";
 import AdminBooking from "./pages/AdminBooking";
 import AdminTransaction from "./pages/AdminTransaction";
+import AdminUsers from "./pages/AdminUsers";
 import "./App.css";
 
 function App() {
@@ -104,6 +105,12 @@ function App() {
           path="/admin/transactions"
           element={
             <ProtectedRoute element={AdminTransaction} allowedRoles={[2, 3]} />
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute element={AdminUsers} allowedRoles={[2, 3]} />
           }
         />
         <Route path="*" element={<NotFoundPage />} />

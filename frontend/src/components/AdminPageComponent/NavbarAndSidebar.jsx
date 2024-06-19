@@ -127,8 +127,9 @@ const NavbarAndSidebar = () => {
                 {userData.role === 3 && (
                   <Nav.Link
                     id="sidebarmenu"
-                    href="/users"
+                    href="/admin/users"
                     className="d-flex align-items-center"
+                    active={location.pathname.startsWith("/admin/users")}
                   >
                     <FaUser className="me-2" />
                     Users
