@@ -95,7 +95,7 @@ const Recommendation = () => {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: Math.min(filteredList.length, 4),
+    slidesToShow: window.innerWidth < 600 ? 1 : Math.min(filteredList.length, 4),
     slidesToScroll: 1,
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,

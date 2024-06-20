@@ -9,7 +9,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import "../dist/detailproperty.css";
-
+s
 const DetailPropertyPage = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
