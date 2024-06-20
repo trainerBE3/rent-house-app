@@ -12,7 +12,7 @@ const ProtectedRoute = ({
   const roleData = JSON.parse(localStorage.getItem("user"));
   const role = roleData?.role;
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated && !notAllowedRoles) {
     Swal.fire({
       title: "Anda diharuskan login untuk melanjutkan!",
       text: "Apakah anda akan melakukan login?",
@@ -33,7 +33,7 @@ const ProtectedRoute = ({
   if (notAllowedRoles && notAllowedRoles.includes(role)) {
     Swal.fire({
       title: "Akses Dicekal",
-      text: `Role ${role} tidak diizinkan mengakses halaman ini`,
+      text: `Anda tidak diizinkan mengakses halaman ini`,
       icon: "error",
       confirmButtonText: "Kembali",
     }).then(() => {
@@ -49,7 +49,7 @@ const ProtectedRoute = ({
   if (allowedRoles && !allowedRoles.includes(role)) {
     Swal.fire({
       title: "Akses Dicekal",
-      text: `Role ${role} tidak diizinkan mengakses halaman ini`,
+      text: `Anda tidak diizinkan mengakses halaman ini`,
       icon: "error",
       confirmButtonText: "Kembali",
     }).then(() => {

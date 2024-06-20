@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Col, Table } from "react-bootstrap";
 import NavbarAndSidebar from "../components/AdminPageComponent/NavbarAndSidebar";
+import "../dist/admintransaction.css";
 
 const AdminBooking = () => {
   const [transactions, setTransactions] = useState([]);
@@ -46,29 +47,37 @@ const AdminBooking = () => {
     <div className="wrapper">
       <NavbarAndSidebar />
       <Col className="main-content">
-        <h1 className="ms-2">History Transaksi</h1>
-        <Table striped bordered hover variant="dark" className="mt-3 text-center">
-          <thead>
-            <tr>
-              <th>Nama Pengguna</th>
-              <th>Judul Properti</th>
-              <th>Tanggal Transaksi</th>
-              <th>Profit</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((transaction) => (
-              <tr key={transaction._id}>
-                <td>{transaction.booking.user.fullname}</td>
-                <td>{transaction.booking.property.title}</td>
-                <td>{formatDate(transaction.transaction_date)}</td>
-                <td>{formatPrice(transaction.profit)}</td>
-                <td>{transaction.status}</td>
+        <div className="transaction-content">
+          <h1 className="ms-2">History Transaksi</h1>
+          <Table
+            striped
+            bordered
+            hover
+            variant="dark"
+            className="mt-3 text-center"
+          >
+            <thead>
+              <tr>
+                <th>Nama Pengguna</th>
+                <th>Judul Properti</th>
+                <th>Tanggal Transaksi</th>
+                <th>Profit</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {transactions.map((transaction) => (
+                <tr key={transaction._id}>
+                  <td>{transaction.booking.user.fullname}</td>
+                  <td>{transaction.booking.property.title}</td>
+                  <td>{formatDate(transaction.transaction_date)}</td>
+                  <td>{formatPrice(transaction.profit)}</td>
+                  <td>{transaction.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </Col>
     </div>
   );
