@@ -19,8 +19,11 @@ app.use(logger("dev"));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.send("tester API");
+});
 
 app.use("/api/users", usersRouter);
 app.use("/api/properties", propertiesRouter);
