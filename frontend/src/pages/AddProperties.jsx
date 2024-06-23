@@ -185,50 +185,62 @@ const AddProperties = () => {
               />
             </div>
             <div className="item-row">
-              <label htmlFor="street">Alamat</label>
-              <input
-                type="text"
-                name="location.street"
-                value={formData.location.street}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="village">Desa</label>
-              <input
-                type="text"
-                name="location.village"
-                value={formData.location.village}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="district">Kecamatan</label>
-              <input
-                type="text"
-                name="location.district"
-                value={formData.location.district}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="city">Kota</label>
-              <input
-                type="text"
-                name="location.city"
-                value={formData.location.city}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="province">Provinsi</label>
-              <input
-                type="text"
-                name="location.province"
-                value={formData.location.province}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="country">Negara</label>
-              <input
-                type="text"
-                name="location.country"
-                value={formData.location.country}
-                onChange={handleInputChange}
-              />
+              <div className="location">
+                <label htmlFor="street">Alamat</label>
+                <input
+                  type="text"
+                  name="location.street"
+                  value={formData.location.street}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="location">
+                <label htmlFor="village">Desa</label>
+                <input
+                  type="text"
+                  name="location.village"
+                  value={formData.location.village}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="location">
+                <label htmlFor="district">Kecamatan</label>
+                <input
+                  type="text"
+                  name="location.district"
+                  value={formData.location.district}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="location">
+                <label htmlFor="city">Kota</label>
+                <input
+                  type="text"
+                  name="location.city"
+                  value={formData.location.city}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="location">
+                <label htmlFor="province">Provinsi</label>
+                <input
+                  type="text"
+                  name="location.province"
+                  value={formData.location.province}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="location">
+                <label htmlFor="country">Negara</label>
+                <input
+                  type="text"
+                  name="location.country"
+                  value={formData.location.country}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-            <div className="item">
+            <div className="item-select">
               <label htmlFor="occupant">Tipe hunian</label>
               <select
                 name="occupant"
@@ -239,18 +251,9 @@ const AddProperties = () => {
                 <option value="Wanita">Wanita</option>
                 <option value="Campur">Campur</option>
               </select>
-            </div>
-            <div className="item">
-              <label htmlFor="size">Ukuran kamar</label>
-              <input
-                type="text"
-                name="details.size"
-                value={formData.details.size}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="item">
-              <label htmlFor="bathrooms">Kamar mandi</label>
+              <label htmlFor="bathrooms" className="ms-2">
+                Kamar mandi
+              </label>
               <select
                 name="details.bathrooms"
                 value={formData.details.bathrooms}
@@ -260,8 +263,10 @@ const AddProperties = () => {
                 <option value="Luar">Luar</option>
               </select>
             </div>
-            <label htmlFor="details">Fasilitas : </label>
             <div className="item-check">
+              <label htmlFor="details" className="ms-0">
+                Fasilitas :{" "}
+              </label>
               <label htmlFor="furnished">Isian</label>
               <input
                 type="checkbox"
@@ -292,6 +297,17 @@ const AddProperties = () => {
               />
             </div>
             <div className="item">
+              <div className="size">
+                <label htmlFor="size">Ukuran kamar</label>
+                <input
+                  type="text"
+                  name="details.size"
+                  value={formData.details.size}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="item">
               <label htmlFor="stocks">Stocks</label>
               <input
                 type="number"
@@ -310,6 +326,9 @@ const AddProperties = () => {
               />
             </div>
             <div className="item">
+              <label htmlFor="foto" style={{ width: "300px" }}>
+                Foto Maksimal 5
+              </label>
               <input
                 type="file"
                 name="images"
@@ -318,16 +337,18 @@ const AddProperties = () => {
                 onChange={handleFileChange}
               />
             </div>
-            <Button
-              className="mt-3 me-3"
-              variant="danger"
-              onClick={handleCancel}
-            >
-              Batal
-            </Button>
-            <Button className="mt-3" type="submit">
-              Kirim
-            </Button>
+            <div className="text-center">
+              <Button
+                className="mt-3 me-3"
+                variant="danger"
+                onClick={handleCancel}
+              >
+                Batal
+              </Button>
+              <Button className="mt-3" type="submit">
+                Kirim
+              </Button>
+            </div>
           </Form>
         </div>
       </Col>

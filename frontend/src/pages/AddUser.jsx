@@ -142,8 +142,10 @@ const AddUser = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="item">
-                <label htmlFor="role">Role</label>
+              <div className="item-role">
+                <label htmlFor="role" className="me-2">
+                  Role
+                </label>
                 <select
                   name="role"
                   value={formData.role}
@@ -155,6 +157,7 @@ const AddUser = () => {
                 </select>
               </div>
               <div className="item">
+                <label htmlFor="foto">Foto maksimal 1</label>
                 <input
                   type="file"
                   name="images"
@@ -163,16 +166,18 @@ const AddUser = () => {
                   onChange={handleFileChange}
                 />
               </div>
-              <Button
-                className="mt-3 me-3"
-                variant="danger"
-                onClick={handleCancel}
-              >
-                Batal
-              </Button>
-              <Button className="mt-3" type="submit">
-                Kirim
-              </Button>
+              <div className="text-center">
+                <Button
+                  className="mt-3 me-3"
+                  variant="danger"
+                  onClick={handleCancel}
+                >
+                  Batal
+                </Button>
+                <Button className="mt-3" type="submit">
+                  Kirim
+                </Button>
+              </div>
             </Form>
           </div>
         </div>
