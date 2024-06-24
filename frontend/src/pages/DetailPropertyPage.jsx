@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Accordion } from "react-bootstrap";
 import NavbarUserComponent from "../components/NavbarUserComponent";
 import DatePicker from "react-datepicker";
+let s;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
@@ -110,19 +111,19 @@ const DetailPropertyPage = () => {
               }`}
             >
               <img
-                src={`${displayedImages[0]}`}
+                src={`https://rent-house-henna.vercel.app${displayedImages[0]}`}
                 alt={`${property.title} image 1`}
                 className="image-1"
               />
               {displayedImages.length > 1 && (
                 <div className="small-images">
                   <img
-                    src={`${displayedImages[1]}`}
+                    src={`https://rent-house-henna.vercel.app${displayedImages[1]}`}
                     alt={`${property.title} image 2`}
                     className="image-2"
                   />
                   <img
-                    src={`${displayedImages[2]}`}
+                    src={`https://rent-house-henna.vercel.app${displayedImages[2]}`}
                     alt={`${property.title} image 3`}
                     className="image-3"
                   />
