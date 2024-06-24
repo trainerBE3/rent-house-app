@@ -4,6 +4,8 @@ const path = require("path");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require("dotenv").config();
+const connectDB = require("./utils/db");
 
 const usersRouter = require("./routes/users");
 const propertiesRouter = require("./routes/properties");
@@ -13,6 +15,7 @@ const bookingsRouter = require("./routes/bookings");
 const transactionsRouter = require("./routes/transactions");
 const dashboardRouter = require("./routes/dashboard");
 
+const port = process.env.PORT || 4573;
 const app = express();
 
 app.use(logger("dev"));
@@ -44,7 +47,14 @@ app.use(function (err, req, res, next) {
     status: err.status,
     stack: err.stack,
   };
-  req.app.get("env") === "development" ? res.json(errorResponse) : {};
+  res.json(errorResponse);
 });
 
-module.exports = app;
+const startServer = async () => {
+  await connectDB();
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+};
+
+startServer();
