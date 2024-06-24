@@ -4,9 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Accordion } from "react-bootstrap";
 import NavbarUserComponent from "../components/NavbarUserComponent";
 import DatePicker from "react-datepicker";
-let s;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+var s = 1;
 import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import "../layouts/detailproperty.css";
@@ -15,7 +15,7 @@ const DetailPropertyPage = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
-  const [months, setMonths] = useState(1);
+  const [months, setMonths] = useState(s);
   const navigate = useNavigate();
 
   useEffect(() => {
